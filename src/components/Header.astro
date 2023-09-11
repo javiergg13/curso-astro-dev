@@ -1,4 +1,5 @@
 ---
+import { Counter } from "./Counter";
 import HeaderButton from "./HeaderButton.astro";
 ---
 
@@ -7,6 +8,8 @@ import HeaderButton from "./HeaderButton.astro";
   <p class="font-light text-gray-400 sm:text-xl dark:text-gray-400 mb-4">
     All the information about SpaceX launches
   </p>
+
+  <Counter transition:persist client:visible />
 
   <nav
     class="felx felx-col items-center justify-between w-full text-center md:flex-row"
