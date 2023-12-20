@@ -1,5 +1,4 @@
 ---
-import type { GetStaticPaths } from "astro";
 import Layout from "../../layouts/Layout.astro";
 import { getLaunchById, getLatestLaunches } from "../../services/spacex";
 
@@ -11,24 +10,30 @@ if (id) {
 }
 
 export async function getStaticPaths() {
-  const launches = await getLatestLaunches()
+  const launches = await getLatestLaunches();
 
   return launches.map((laun) => ({
-    params: { id: laun.id}
-  }))
+    params: { id: laun.id },
+  }));
 }
 ---
 
 <Layout title=`Lanzamiento ${id}`>
   <article class="flex flex-col gap-y-4">
-    <img 
+    <img
       class="w-52 h-auto"
       src={launch?.links?.patch.small}
-      alt={launch?.name} 
+      alt={launch?.name}
+      transition:name=`${launch?.id} image`
     />
-    <h2 class="text-4xl text-white font-bold">
+    <h2
+      class="text-4xl text-white font-bold"
+      transition:name=`${launch?.id} title`
+    >
       Launch #{launch?.flight_number}
     </h2>
-    <p class="text-lg text-white">{launch?.details}</p>
+    <p class="text-lg text-white" transition:name=`${launch?.id} details`>
+      {launch?.details}
+    </p>
   </article>
 </Layout>
